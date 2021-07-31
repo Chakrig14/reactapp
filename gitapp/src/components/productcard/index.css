@@ -1,0 +1,55 @@
+.product-image{
+    width:250px;
+    border-radius:8px;
+}
+.product-title{
+    color:#1e293b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:600;
+    font-size:20px;
+}
+.product-brand{
+    color: #475569;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:500;
+    font-size:15px;
+}
+.product-price{
+    color:#1e293b;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:600;
+    font-size:15px;
+}
+.product-pandr{
+    display: flex;
+    justify-content: space-between;
+}
+.star{
+    width:18px;
+    height:18px;
+}
+.product-rating{
+    color:#ffffff;
+    font-size: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+}
+.rating{
+    background-color: #0967d2;
+    border-radius: 8px;
+    padding:10px;
+    display: flex;
+    width:60px;
+    height:28px;
+    justify-content: space-around;
+    padding: 6px;
+}
+.card{
+    max-width: 260px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+.card-content{
+    padding-left:10px;
+    padding-right:10px;
+}

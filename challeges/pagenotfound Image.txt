@@ -1,3 +1,0 @@
-https://assets.ccbp.in/frontend/react-js/not-found-blog-img.png
-
-https://assets.ccbp.in/frontend/react-js/api-failure-view.png

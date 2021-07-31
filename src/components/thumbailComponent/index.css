@@ -1,0 +1,12 @@
+.thumb-img{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+}
+.list{
+    list-style-type: none;
+    margin-left: 10px;
+}
+.image-view{
+    opacity: 0.5;
+}

@@ -37,7 +37,7 @@ class Products extends Component{
         const {productList,isLoading} = this.state
         return(
             <div>
-                <h1>All Products</h1>
+                <h1>Products</h1>
                 {isLoading ? (<div className="loader">
                     <Loader type="Circles" color="black" height={50} width={50}/>
                 </div>) : (<div className="product-card">

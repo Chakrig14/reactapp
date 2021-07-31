@@ -1,0 +1,32 @@
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left:16px;
+    margin-right:16px;
+}
+.image-logo{
+    width:50px;
+    height: 50px;
+}
+.link-list{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+.nav-link{
+    margin-left:10px;
+    text-decoration: none;
+}
+.logo-name{
+    color: #000000;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    margin-left: 15px;
+}
+@media screen and (min-width:768px){
+    .navbar{
+        justify-content: space-between;
+    }
+}

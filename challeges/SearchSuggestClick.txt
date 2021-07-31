@@ -1,0 +1,62 @@
+import {Component} from "react"
+import SearchContent from "./destination"
+const searchList = [
+  {
+    id: 1,
+    listName: "Price of Ethereum today"
+  },
+  {
+    id: 2,
+    listName: "Tesla Share Pirce"
+  },
+  {
+    id: 3,
+    listName: "Price of Ethereum"
+  },
+  {
+    id: 4,
+    listName: "Latest Trending Technologies"
+  }
+]
+class SearchSuggest extends Component{
+  state = {
+    searchInput:'',
+    searchInputList: searchList,
+    searchInput1: ''
+  }
+  onChangeInput = event => {
+    this.setState( {searchInput:event.target.value})
+  }
+  onClickPop = listName => {
+    console.log(listName)
+    this.setState(() => ({searchInput:listName}))
+    // const clickPop = searchInputList.filter(eachPop => eachPop.listName === listName)
+    // this.setState({searchInput:clickPop.listName})
+  }
+  render(){
+    const {searchInput,searchInputList} = this.state
+    const filteredSearch = searchInputList.filter(eachList => 
+      eachList.listName.includes(searchInput)
+    )
+    return(
+      <div className="bg-container">
+        <div className="main-card">
+        <img src="https://assets.ccbp.in/frontend/react-js/google-logo.png" alt="googleIcon" className="image"/>
+        <div className="search-card">
+        <div className="img-sec">
+            <img src="https://assets.ccbp.in/frontend/react-js/google-search-icon.png" alt="searchIcon" className="icon-img"/>
+            <input type="search" placeholder="Search Google" className="search-bar" onChange={this.onChangeInput} value={searchInput}/>
+          </div>
+          <div>
+              {filteredSearch.map(eachItem => 
+                  <SearchContent searchDetails={eachItem} key={eachItem.id} onClickPop={this.onClickPop}/>
+            )}
+          </div>
+        </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+export default SearchSuggest

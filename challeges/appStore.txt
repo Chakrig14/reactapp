@@ -1,0 +1,187 @@
+import {Component} from "react"
+import TabItem from "./components/tabContent/index"
+import AppItem from "./components/appContent/index"
+import "./App.css"
+
+const tabList=[
+  {
+    tabId: 1,
+    tabName:"Social"
+  },
+  {
+    tabId: 2,
+    tabName: "Games"
+  },
+  {
+    tabId: 3,
+    tabName:"News"
+  },
+  {
+    tabId:4,
+    tabName:"Food"
+  }
+]
+
+const appList = [
+  {
+    appId: 1,
+    appCategory:"Social",
+    appName: "Whats App",
+    appImage:"https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+  },
+  {
+    appId: 2,
+    appCategory:"Social",
+    appName: "Facebook",
+    appImage:"https://thumbor.forbes.com/thumbor/fit-in/416x416/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F5cd1ab9ad606c400081eac42%2F0x0.jpg%3Fbackground%3D000000%26cropX1%3D0%26cropX2%3D416%26cropY1%3D0%26cropY2%3D416"
+  },
+  {
+    appId: 3,
+    appCategory:"Social",
+    appName: "Messenger",
+    appImage:"https://facebookbrand.com/wp-content/uploads/2020/10/Logo_Messenger_NewBlurple-399x399-1.png?w=399&h=399"
+  },
+  {
+    appId: 4,
+    appCategory:"Social",
+    appName: "SnapChat",
+    appImage:"https://assets.stickpng.com/images/580b57fcd9996e24bc43c536.png"
+  },
+  {
+    appId: 5,
+    appCategory:"Social",
+    appName: "Telegram",
+    appImage:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png"
+  },
+  {
+    appId: 6,
+    appCategory:"Social",
+    appName: "Instagram",
+    appImage:"https://www.edigitalagency.com.au/wp-content/uploads/instagram-logo-svg-vector-for-print.svg"
+  },
+  {
+    appId: 7,
+    appCategory:"Social",
+    appName: "Pinterest",
+    appImage:"https://i.pinimg.com/originals/1b/76/01/1b7601e035a83c13c208b4ec905ee6d9.png"
+  },
+  {
+    appId: 8,
+    appCategory:"Games",
+    appName: "Subway Sufers",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 9,
+    appCategory:"Games",
+    appName: "Temple Run",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 10,
+    appCategory:"Games",
+    appName: "Dr Driving",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 11,
+    appCategory:"Games",
+    appName: "Need for Speed",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 12,
+    appCategory:"Games",
+    appName: "Highway Rider",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 13,
+    appCategory:"Games",
+    appName: "Hill Climb Racing",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 14,
+    appCategory:"Games",
+    appName: "Asphalt-8",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 15,
+    appCategory:"News",
+    appName: "Way2 News",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 16,
+    appCategory:"News",
+    appName: "Saakshi",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 17,
+    appCategory:"News",
+    appName: "Mango News",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 18,
+    appCategory:"Food",
+    appName: "Zomato",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 19,
+    appCategory:"Food",
+    appName: "Swiggy",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 20,
+    appCategory:"Food",
+    appName: "Uber Eats",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  },
+  {
+    appId: 21,
+    appCategory:"Food",
+    appName: "Swiggy Delivery",
+    appImage:"https://img.captain-droid.com/wp-content/uploads/com-kiloo-subwaysurf-icon.png"
+  }
+]
+
+class App extends Component{
+  state = {activeTab:tabList[0].tabName,searchInput:""}
+  inputSearch= event =>{
+    this.setState({searchInput:event.target.value});
+  }
+  onClickCategory = tabValue => {
+    this.setState({activeTab: tabValue})
+  }
+
+  getFilteredApps = () => {
+    const {activeTab,searchInput} = this.state
+    const filteredApps = appList.filter(eachItemApp => eachItemApp.appCategory === activeTab)
+    const searchApp = filteredApps.filter(eachSearchApp => eachSearchApp.appName.toLowerCase().includes(searchInput))
+    return searchApp
+  }
+  render(){
+    const {activeTab} = this.state
+    const searchApp = this.getFilteredApps()
+    return(
+      <div className="bg-container">
+        <h1>App Store</h1>
+        <input type="search" placeholder="Search" onChange={this.inputSearch}/>
+        <ul className="tab-list">
+          {tabList.map(eachTab => (<TabItem key={eachTab.tabId} tabDetails={eachTab} onClickCategory = {this.onClickCategory} isActive={activeTab=== eachTab.tabName}/>))}
+        </ul>
+        <div className="bg-app">
+          {searchApp.map(eachApp => (<AppItem key={eachApp.appId} appDetails={eachApp}/>))}
+        </div>
+      </div>
+    )
+  }
+}
+
+export default App

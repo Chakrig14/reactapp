@@ -1,0 +1,134 @@
+import { BrowserRouter,Switch,Route} from "react-router-dom";
+import Home from "./components/home/index"
+import Login from "./components/login/index"
+import About from "./components/about/index"
+import Header from "./components/header/index"
+import ProtectedRoute from "./components/protectedroute/index"
+
+const App = () => (
+  <BrowserRouter>
+  <Header />
+  <Switch>
+    <Route exact path="/login" component={Login} />
+    <ProtectedRoute exact path="/" component={Home}/>
+    <ProtectedRoute exact path="/about" component={About} />
+  </Switch>
+  </BrowserRouter>
+)
+
+export default App
+
+import {Link} from "react-router-dom"
+
+const Header = () => {
+    return(
+        <div>
+            <ul>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/about">About</Link>
+                </li>
+            </ul>
+        </div>
+    )
+}
+
+export default Header
+
+import {withRouter} from "react-router-dom"
+import Cookie from "js-cookie"
+const Home = (props) => {
+    const logoutApp = () => {
+        Cookie.remove("jwt_token");
+        const{history} = props
+        history.replace("/login")
+    }
+    return(
+        <div>
+            <h1>Home Route</h1>
+            <button onClick={logoutApp}>Logout</button>
+        </div>
+    )
+}
+
+export default withRouter(Home)
+
+import {withRouter} from "react-router-dom"
+import Cookie from "js-cookie"
+const About  = (props) => {
+    const logoutApp = () => {
+        Cookie.remove("jwt_token");
+        const{history} = props
+        history.replace("/login")
+    }
+    return(
+        <div>
+            <h1>About Route</h1>
+            <button onClick={logoutApp}>Logout</button>
+        </div>
+    )
+}
+
+export default withRouter(About)
+
+import {Component} from "react"
+import Cookies from "js-cookie"
+import {Redirect} from "react-router-dom"
+class Login extends Component {
+    onSuccess = jwtToken => {
+        const {history} = this.props
+        Cookies.set("jwt_token",jwtToken,{
+            expires:1,
+            path:"/"
+        })
+        history.replace("/")
+    }
+    loginPage= async (event) => {
+        event.preventDefault()
+        const username="rahul"
+        const password="rahul@2021"
+        const userDetails  = {username,password}
+        const url ="https://apis.ccbp.in/login"
+        const options= {
+            method:"POST",
+            body:JSON.stringify(userDetails)
+        }
+        const response = await fetch(url,options)
+        const data=await response.json()
+        if(response.ok=== true){
+            this.onSuccess(data.jwt_token)
+        }
+    }
+    render(){
+        const jwtToken = Cookies.get("jwt_token")
+        if(jwtToken !== undefined){
+           return <Redirect to="/" />
+        }
+
+        return(
+            <div>
+                <form onSubmit={this.loginPage}>
+                <h1>Please Login</h1>
+                <button type="submit">Login with Sample Creds</button>
+                </form>
+            </div>
+        )
+    }
+}
+
+export default Login
+
+import {Redirect,Route} from "react-router-dom"
+import Cookies from "js-cookie"
+
+const ProtectedRoute = props => {
+    const token = Cookies.get("jwt_token")
+    if(token === undefined){
+        return(<Redirect to="/login" />)
+    }
+    return <Route {...props}/>
+}
+
+export default ProtectedRoute
